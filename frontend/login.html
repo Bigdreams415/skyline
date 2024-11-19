@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="background">
+        <div class="login-container">
+            <div class="form-wrapper">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Log in to access your account</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <!-- During maintainance remember to make the login method both username and email -->
+                        <label for="usernameOrEmail">Username</label>
+                        <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Enter your username" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                    </div>
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" name="rememberMe"> Remember Me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="login-btn">Login</button>
+                    </div>
+                    <p class="signup-link">
+                        Don’t have an account? <a href="signup.html">Sign up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

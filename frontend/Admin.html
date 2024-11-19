@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="Admin.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="#online-deposit">Online Deposit</a></li>
+            <li><a href="#manage-balance">Manage Balance</a></li>
+            <li><a href="#blc">BLC</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header Section -->
+        <header>
+            <h1>Admin Dashboard</h1>
+            <div class="admin-info">
+                <span>Welcome, Admin</span>
+                <button>Logout</button>
+            </div>
+        </header>
+
+        <section id="online-deposit" class="section">
+            <h2>Online Deposit</h2>
+            <form class="deposit-form">
+                <label for="crypto-type">Select Crypto Type:</label>
+                <select id="crypto-type">
+                    <option value="btc">Bitcoin</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="ltc">Litecoin</option>
+                </select>
+                <label for="wallet-address">Wallet Address:</label>
+                <input type="text" id="wallet-address" placeholder="Enter wallet address">
+                <button type="submit">Update Address</button>
+            </form>
+        
+            <!-- Container to display deposit methods -->
+            <ul id="deposit-methods-list">
+                <!-- Deposit methods will be listed here -->
+            </ul>
+        </section>
+        
+
+        <!-- Manage Balance Section -->
+        <section id="manage-balance" class="section">
+            <h2>Manage Balance</h2>
+            <div class="search-bar">
+                <input type="text" id="search-account" placeholder="Search by Account Number">
+                <button>Search</button>
+            </div>
+            <div id="user-details">
+                <!-- User balance info will be populated here after search -->
+            </div>
+        </section>
+
+        <!-- BLC Section -->
+        <section id="blc" class="section">
+            <h2>BLC (Balance-Related Fields)</h2>
+            <div class="search-bar">
+                <input type="text" id="search-account-blc" placeholder="Search by Account Number">
+                <button id="search-button">Search</button>
+            </div>
+            <div class="balance-fields">
+                <label for="totalBalance">Total Balance:</label>
+                <input type="number" id="totalBalance" placeholder="Update total balance">
+
+                <label for="loan-balance">Loan Balance:</label>
+                <input type="number" id="loan-balance" placeholder="Enter loan balance">
+
+                <label for="expenses">Expenses:</label>
+                <input type="number" id="expenses" placeholder="Enter expenses">
+
+                <label for="payments-today">Payments Today:</label>
+                <input type="number" id="payments-today" placeholder="Enter payments today">
+
+                <label for="new-loans">New Loans:</label>
+                <input type="number" id="new-loans" placeholder="Enter new loans">
+
+                <label for="transactions">Transactions:</label>
+                <input type="number" id="transactions" placeholder="Enter transactions">
+
+                <button id="update-blc-btn">Update BLC</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="Admin.js"></script>
+</body>
+</html>

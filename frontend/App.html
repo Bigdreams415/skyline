@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="App.css">
+
+    <title>Banking App</title>
+        <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '74d1918c056d2bb4a94a072e4640f79d832b51c1';
+        window.smartsupp||(function(d) {
+        var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+        s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+        c.type='text/javascript';c.charset='utf-8';c.async=true;
+        c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+        })(document);
+        </script>
+        <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a>
+    </noscript>
+</head>
+<body>
+    <!-- Sidebar/Menu -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" id="closeBtn">&times;</button> <!-- Close button for mobile view -->
+        <h2>Skyline Bank</h2>
+        <ul>
+            <li><a href="#dashboard" id="dashboard-menu" class="active"><span class="icon">&#128176;</span> Dashboard</a></li>
+            <li><a href="#deposit" id="online-menu"><span class="icon">&#128200;</span> Online Deposit</a></li>
+            <li><a href="#withdrawal" id="Withdrawal-menu"><span class="icon">&#128200;</span> Withdrawal</a></li>
+            <li><a href="#transfer" id="wire-transfer-menu"><span class="icon">&#128178;</span> Wire Transfer</a></li>
+            <li><a href="#domestic" id="domestic-transfer-menu"><span class="icon">&#128178;</span> Domestic Transfer</a></li>
+            <li><a href="#virtual" id="virtual-card-menu"><span class="icon">&#128179;</span> Virtual Card</a></li>
+            <li><a href="#loan" id="Loan-menu"><span class="icon">&#128179;</span> Loan & Mortgages</a></li>
+            <li><a href="#transactions" id="transaction-menu"><span class="icon">&#128179;</span> Transactions Details</a></li>
+            <li><a href="#account" id="account-manager-menu"><span class="icon">&#128179;</span> Account Manager</a></li>
+        </ul>
+    </div>
+
+    <!-- Hamburger Icon for Mobile View -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <span>&#9776;</span> <!-- Hamburger Icon -->
+    </div>
+
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+        <!-- Top Navigation Bar -->
+        <div class="top-nav">
+            <button id="hamburger" class="hamburger">&#9776;</button> <!-- Hamburger Menu Button -->
+            <input type="text" placeholder="Search...">
+            <div class="user-info">
+                <span class="notification">&#128276;</span>
+                <span class="profile">👤</span>
+            </div>
+        </div>
+
+        <!-- User Information Box -->
+        <div class="user-info-box">
+            <div class="user-info">
+                <span class="welcome-text">Welcome, <strong id="username">Username</strong>!</span>
+            </div>
+            <div class="user-uid-container">
+                <span class="uid-text">Account Number:</span>
+                <span id="userUid" class="uid-value">12345678</span>
+            </div>
+        </div>
+
+
+        
+        <div class="content-section" id="dashboard-sec">
+            <section class="dashboard">
+
+                <!-- Balance Card -->
+                <div class="card balance-card">
+                    <h2><i class="icon-balance"></i> Balance</h2>
+                    <!-- <p>Welcome, <strong id="username">User Name</strong></p> -->
+                    <p>Total Balance: <span id="total-balance" class="balance-amount">$</span></p>
+                    <p>Total Transaction: <span id="total-transaction">0</span></p>
+                    <p>Total Loan: $<span id="total-loan">0</span></p>
+                </div>
+            
+                <!-- Monthly Transaction Chart Card -->
+                <div class="card transaction-chart-card">
+                    <h2><i class="icon-chart"></i> Monthly Transactions</h2>
+                    <div class="chart-bars">
+                        <div class="chart-bar" data-progress="70" style="background: #4caf50;">70%</div>
+                        <div class="chart-bar" data-progress="45" style="background: #ff9800;">45%</div>
+                        <div class="chart-bar" data-progress="85" style="background: #2196f3;">85%</div>
+                    </div>
+                </div>
+            
+                <!-- Summary Card -->
+                <div class="card summary-card">
+                    <h2><i class="icon-summary"></i> Summary</h2>
+                    <p>Loan Balance: $<span id="loan-balance">0</span></p>
+                    <p>Expenses: $<span id="expenses">0</span></p>
+                    <p>Status: <span id="summary-status" class="status">On Track</span></p>
+                    <div class="progress-bar">
+                        <div id="progress-bar" class="progress"></div>
+                    </div>
+                </div>
+            
+                <!-- Daily Stats Card -->
+                <div class="card daily-stats-card">
+                    <h2><i class="icon-stats"></i> Daily Stats</h2>
+                    <p>New Loans: <span id="new-loans" class="stat-number" data-target="">0</span></p>
+                    <p>Payments Today: <span id="payments-today" class="stat-number" data-target="">0</span></p>
+                    <p>Transactions: <span id="transactions" class="stat-number" data-target="">0</span></p>
+                </div>
+            
+            </section>
+            
+
+            <section class="recent-transactions">
+                <h2>Recent Transactions</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody>
+                        <tr>
+                            <td>2024-11-13</td>
+                            <td>Deposit</td>
+                            <td class="credit">$500.00</td>
+                            <td class="completed">Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2024-11-12</td>
+                            <td>Withdrawal</td>
+                            <td class="debit">-$200.00</td>
+                            <td class="pending">Pending</td>
+                        </tr>
+                        <tr>
+                            <td>2024-11-11</td>
+                            <td>Transfer</td>
+                            <td class="debit">-$150.00</td>
+                            <td class="completed">Completed</td>
+                        </tr>
+                    </tbody> -->
+                </table>
+            </section>
+        </div>
+
+
+        <div class="content-section" id="online-deposit" style="display: none;">
+            <div class="online-deposit">
+                <h2>Online Deposit</h2>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <!-- Amount Field -->
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <div class="amount-field">
+                            <span class="currency">$</span>
+                            <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Crypto Type Dropdown -->
+                    <div class="form-group">
+                        <label for="crypto-type">Crypto Type</label>
+                        <select id="crypto-type" name="crypto-type" required>
+                            <option value="bitcoin">Bitcoin</option>
+                            <option value="ethereum">Ethereum</option>
+                            <option value="litecoin">Litecoin</option>
+                            <!-- Add more crypto types as needed -->
+                        </select>
+                    </div>
+                    
+                    <!-- Wallet Address Field -->
+                    <div class="form-group">
+                        <label for="wallet-address">Wallet Address</label>
+                        <div class="wallet-address">
+                            <input type="text" id="wallet-address" name="wallet-address" disabled>
+                            <button type="button" class="copy-btn" onclick="copyWalletAddress()">Copy</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Receipt Upload Field -->
+                    <div class="form-group">
+                        <label for="receipt-upload">Upload Receipt</label>
+                        <input type="file" id="receipt-upload" name="receipt" accept="image/*" onchange="previewImage(event)" required>
+                        <div id="receipt-preview">
+                            <img id="preview-img" src="" alt="Receipt Preview" style="display:none;">
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Submit Deposit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="content-section" id="wire-transfer" style="display: none;">
+            <div class="wire-transfer">
+                <h2>Wire Transfer</h2>
+                <form action="#" method="POST">
+                    <!-- Amount and Beneficiary Account Name Side by Side -->
+                    <div class="wire-form-group-half">
+                        <div class="wire-form-group">
+                            <label for="amount">Amount</label>
+                            <div class="amount-field">
+                                <span class="currency">$</span>
+                                <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                            </div>
+                        </div>
+                        <div class="wire-form-group">
+                            <label for="beneficiary-name">Beneficiary Account Name</label>
+                            <input type="text" id="beneficiary-name" name="beneficiary-name" placeholder="Beneficiary account name" required>
+                        </div>
+                    </div>
+        
+                    <!-- Bank Name and Beneficiary Account Number Side by Side -->
+                    <div class="wire-form-group-half">
+                        <div class="wire-form-group">
+                            <label for="bank-name">Bank Name</label>
+                            <input type="text" id="bank-name" name="bank-name" placeholder="Bank name" required>
+                        </div>
+                        <div class="wire-form-group">
+                            <label for="account-number">Beneficiary Account Number</label>
+                            <input type="text" id="account-number" name="account-number" placeholder="Beneficiary account number" required>
+                        </div>
+                    </div>
+        
+                    <!-- Country, SWIFT Code, Routing Number, Account Type Side by Side -->
+                    <div class="wire-form-group-half">
+                        <div class="wire-form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select country</option>
+                                <option value="US">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                            </select>
+                        </div>
+                        <div class="wire-form-group">
+                            <label for="swift-code">SWIFT Code</label>
+                            <input type="text" id="swift-code" name="swift-code" placeholder="SWIFT code" required>
+                        </div>
+                    </div>
+        
+                    <div class="wire-form-group-half">
+                        <div class="wire-form-group">
+                            <label for="routing-number">Routing Number</label>
+                            <input type="text" id="routing-number" name="routing-number" placeholder="Routing number" required>
+                        </div>
+                        <div class="wire-form-group">
+                            <label for="account-type">Account Type</label>
+                            <select id="account-type" name="account-type" required>
+                                <option value="">Select account type</option>
+                                <option value="savings">Savings</option>
+                                <option value="checking">Checking</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <!-- Narration/Purpose (Full Width) -->
+                    <div class="wire-form-group full-width">
+                        <label for="narration">Narration/Purpose</label>
+                        <textarea id="narration" name="narration" placeholder="Purpose of transfer" rows="3" required></textarea>
+                    </div>
+        
+                    <!-- Transfer Button -->
+                    <div class="wire-form-group full-width">
+                        <button type="submit" class="transfer-btn">Transfer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+
+        <div class="content-section" id="loan" style="display: none;">
+            <div class="loan-application-section">
+                <h2>Loan/Mortgages Application</h2>
+                <form action="#" method="POST">
+                    <!-- Amount Field -->
+                    <div class="form-group loan-amount-group">
+                        <label for="loan-amount">Amount</label>
+                        <div class="loan-amount-field">
+                            <span class="loan-currency">$</span>
+                            <input type="number" id="loan-amount" name="loan-amount" placeholder="Enter amount" required>
+                        </div>
+                    </div>
+        
+                    <!-- Receiver Field (Disabled) -->
+                    <div class="form-group loan-receiver-group">
+                        <label for="receiver">Receiver (Customer Care)</label>
+                        <input type="text" id="receiver" name="receiver" value="Customer Care" disabled>
+                    </div>
+        
+                    <!-- Narration/Purpose Field (Full Width) -->
+                    <div class="form-group loan-narration-group">
+                        <label for="narration">Narration/Purpose</label>
+                        <textarea id="narration" name="narration" placeholder="Purpose of loan or mortgage" rows="3" required></textarea>
+                    </div>
+        
+                    <!-- Submit Button -->
+                    <div class="form-group loan-submit-group">
+                        <button type="submit" class="loan-submit-btn">Submit Application</button>
+                    </div>
+                </form>
+            </div> 
+        </div>
+        
+        <div class="content-section" id="domestic-transfer-section" style="display: none;">
+            <div class="unique-domestic-transfer">
+                <h2 class="dt-title">Domestic Transfer</h2>
+                <form action="#" method="POST" class="unique-dt-form">
+                    <!-- Amount Field -->
+                    <div class="unique-dt-field-group unique-dt-half-width">
+                        <label for="unique-dt-amount">Amount</label>
+                        <div class="unique-dt-amount">
+                            <span class="unique-dt-currency">$</span>
+                            <input type="number" id="unique-dt-amount" name="unique-dt-amount" placeholder="Enter amount" required>
+                        </div>
+                    </div>
+        
+                    <!-- Beneficiary Account Name -->
+                    <div class="unique-dt-field-group unique-dt-half-width">
+                        <label for="unique-dt-beneficiary-name">Beneficiary Account Name</label>
+                        <input type="text" id="unique-dt-beneficiary-name" name="unique-dt-beneficiary-name" placeholder="Beneficiary account name" required>
+                    </div>
+        
+                    <!-- Bank Name -->
+                    <div class="unique-dt-field-group unique-dt-half-width">
+                        <label for="unique-dt-bank-name">Bank Name</label>
+                        <input type="text" id="unique-dt-bank-name" name="unique-dt-bank-name" placeholder="Bank name" required>
+                    </div>
+        
+                    <!-- Beneficiary Account Number -->
+                    <div class="unique-dt-field-group unique-dt-half-width">
+                        <label for="unique-dt-account-number">Beneficiary Account Number</label>
+                        <input type="text" id="unique-dt-account-number" name="unique-dt-account-number" placeholder="Beneficiary account number" required>
+                    </div>
+        
+                    <!-- Select Account Type -->
+                    <div class="unique-dt-field-group unique-dt-half-width">
+                        <label for="unique-dt-account-type">Account Type</label>
+                        <select id="unique-dt-account-type" name="unique-dt-account-type" required>
+                            <option value="">Select account type</option>
+                            <option value="savings">Savings</option>
+                            <option value="checking">Checking</option>
+                        </select>
+                    </div>
+        
+                    <!-- Narration/Purpose -->
+                    <div class="unique-dt-field-group unique-dt-full-width">
+                        <label for="unique-dt-narration">Narration/Purpose</label>
+                        <textarea id="unique-dt-narration" name="unique-dt-narration" placeholder="Purpose of transfer" rows="3" required></textarea>
+                    </div>
+        
+                    <!-- Transfer Button -->
+                    <div class="unique-dt-field-group unique-dt-full-width">
+                        <button type="submit" class="unique-dt-button">Transfer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+        <div class="content-section" id="withdrawal-section" style="display: none ;">
+            <div class="withdrawal-section" id="withdrawal-section">
+                <div class="withdrawal-container">
+                    <h2>Withdrawal Section</h2>
+            
+                    <!-- Tab Navigation -->
+                    <div class="withdrawal-tabs">
+                        <button class="withdrawal-tab active" data-method="crypto">Crypto Withdrawal</button>
+                        <button class="withdrawal-tab" data-method="bank">Bank Withdrawal</button>
+                    </div>
+            
+                    <!-- Crypto Withdrawal Form -->
+                    <div class="withdrawal-method crypto-method" id="crypto-method">
+                        <form method="POST" class="withdrawal-form">
+                            <div class="withdrawal-group half-width">
+                                <label for="crypto-amount">Amount</label>
+                                <div class="amount-field">
+                                    <span class="currency">$</span>
+                                    <input type="number" id="crypto-amount" name="crypto-amount" placeholder="Enter amount" required>
+                                </div>
+                            </div>
+            
+                            <div class="withdrawal-group half-width">
+                                <label for="crypto-type">Withdrawal Type</label>
+                                <select id="crypto-type" name="crypto-type" required>
+                                    <option value="">Select type</option>
+                                    <option value="bitcoin">Bitcoin</option>
+                                    <option value="ethereum">Ethereum</option>
+                                    <option value="litecoin">Litecoin</option>
+                                </select>
+                            </div>
+            
+                            <div class="withdrawal-group full-width">
+                                <label for="crypto-wallet">Wallet Address</label>
+                                <input type="text" id="crypto-wallet" name="crypto-wallet" placeholder="Enter wallet address" required>
+                            </div>
+            
+                            <div class="withdrawal-group full-width">
+                                <button type="submit" class="withdrawal-submit">Withdraw Funds</button>
+                            </div>
+                        </form>
+                    </div>
+            
+                    <!-- Bank Withdrawal Form -->
+                    <div class="withdrawal-method bank-method" id="bank-method" style="display: none;">
+                        <div class="withdrawal-warning">
+                            <p>⚠️ Name on account must match the username of the account.</p>
+                        </div>
+                        <form method="POST" class="withdrawal-form">
+                            <div class="withdrawal-group half-width">
+                                <label for="bank-name">Bank Name</label>
+                                <input type="text" id="bank-name" name="bank-name" placeholder="Enter bank name" required>
+                            </div>
+            
+                            <div class="withdrawal-group half-width">
+                                <label for="account-number">Account Number</label>
+                                <input type="text" id="account-number" name="account-number" placeholder="Enter account number" required>
+                            </div>
+            
+                            <div class="withdrawal-group half-width">
+                                <label for="routing-number">Routing Number</label>
+                                <input type="text" id="routing-number" name="routing-number" placeholder="Enter routing number" required>
+                            </div>
+            
+                            <div class="withdrawal-group half-width">
+                                <label for="bank-amount">Amount</label>
+                                <div class="amount-field">
+                                    <span class="currency">$</span>
+                                    <input type="number" id="bank-amount" name="bank-amount" placeholder="Enter amount" required>
+                                </div>
+                            </div>
+            
+                            <div class="withdrawal-group full-width">
+                                <button type="submit" class="withdrawal-submit">Withdraw Funds</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Summary Modal -->
+            <div id="transaction-summary-modal">
+                <div class="modal-content">
+                    <div class="modal-header">Transaction Summary</div>
+                    <div id="summary-details">
+                        <!-- Transaction details will be populated here dynamically -->
+                    </div>
+                    <div class="modal-actions">
+                        <button id="confirm-transaction" class="confirm-btn">Confirm</button>
+                        <button id="cancel-transaction" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PIN Entry Modal (Initially Hidden) -->
+            <div id="pin-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+
+                    <button id="close-pin-modal" class="close-btn">&#10005;</button> <!-- 'X' icon -->
+
+                    <h1>Enter your PIN to authenticate your transaction</h1>
+
+                    <!-- Pin Input Section -->
+                    <div class="pin-input-container">
+                        <input type="text" id="pin" class="pin-input" maxlength="4" readonly placeholder="----"/>
+                    </div>
+
+                    <!-- Onscreen Keyboard -->
+                    <div class="keyboard">
+                        <button class="key" data-key="1">1</button>
+                        <button class="key" data-key="2">2</button>
+                        <button class="key" data-key="3">3</button>
+                        <button class="key" data-key="4">4</button>
+                        <button class="key" data-key="5">5</button>
+                        <button class="key" data-key="6">6</button>
+                        <button class="key" data-key="7">7</button>
+                        <button class="key" data-key="8">8</button>
+                        <button class="key" data-key="9">9</button>
+                        <button class="key cancel" data-key="clear">&#10005; Cancel</button> <!-- 'X' cancel icon -->
+                        <button class="key" data-key="0">0</button>
+                        <button class="key" data-key="question">?</button> <!-- ? icon placeholder -->
+                        <button class="key submit" data-key="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="content-section" id="account-management" style="display: none;">
+            <div class="account-manager">
+                <h1>Account Manager</h1>
+                <div class="tabs">
+                    <div class="tab active" data-tab="overview">Account Overview</div>
+                    <div class="tab" data-tab="activity-logs">Activity Logs</div>
+                    <div class="tab" data-tab="deactivation">Account Deactivation</div>
+                    <div class="tab" data-tab="documents">Document Management</div>
+                </div>
+            
+                <div id="overview" class="tab-panel active">
+                    <div class="overview-card">
+                        <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                        <h3>Name: John Doe</h3>
+                        <p>Email: johndoe@example.com</p>
+                        <p>Account Type: Premium</p>
+                        <p>Account Limit: $50,000</p>
+                        <p>Account Creation Date: January 1, 2022</p>
+                    </div>
+                </div>
+            
+                <div id="activity-logs" class="tab-panel">
+                    <h2>Recent Activity</h2>
+                    <table>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Date</th>
+                        </tr>
+                        <tr>
+                            <td>Login</td>
+                            <td>2024-11-10 08:00</td>
+                        </tr>
+                        <tr>
+                            <td>Profile Updated</td>
+                            <td>2024-11-12 15:00</td>
+                        </tr>
+                    </table>
+                </div>
+            
+                <div id="deactivation" class="tab-panel">
+                    <h2>Account Deactivation & Closure</h2>
+                    <p>If you wish to deactivate your account, please contact support.</p>
+                    <button class="deactivate-btn">Deactivate Account</button>
+                </div>
+            
+                <div id="documents" class="tab-panel">
+                    <h2>Document Management</h2>
+                    <div class="upload-area">
+                        <p>Drag & drop your KYC documents here or click to upload.</p>
+                        <input type="file" name="documents" id="documents" style="display:none;">
+                        <button class="upload-btn" onclick="document.getElementById('documents').click();">Upload Document</button>
+                    </div>
+                    <div class="approval-status">
+                        <p>Status: <span>Approved</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+    </div>
+
+    <script src="App.js"></script>  
+</body>
+</html>

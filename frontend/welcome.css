@@ -1,0 +1,132 @@
+/* Reset some basic elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0; /* Light grey background for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Main container for content (Wider card with reduced height) */
+.container {
+    background-color: #ffffff; /* White background for the form */
+    padding: 30px 40px;  /* Adjusted padding for better horizontal spacing */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;  /* Increased width */
+    text-align: center;
+    height: auto;  /* Let content size adjust naturally */
+}
+
+/* Title styling */
+h1 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Pin input field */
+.pin-input-container {
+    margin-bottom: 20px;
+}
+
+.pin-input {
+    font-size: 32px;
+    letter-spacing: 10px;
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    text-align: center;
+    color: #333;
+    cursor: not-allowed;
+}
+
+.pin-input:focus {
+    outline: none;
+    border-color: #3b9ef3; /* Focus border color */
+}
+
+/* Keyboard container for layout */
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+/* Key button styles */
+.key {
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #333;
+    font-weight: bold;
+}
+
+.key:hover {
+    background-color: #e6e6e6; /* Light grey hover effect */
+    transform: scale(1.05); /* Slightly increase button size on hover */
+}
+
+.key:active {
+    background-color: #d1d1d1; /* Darker grey on button press */
+    transform: scale(0.98); /* Slightly reduce button size when pressed */
+}
+
+/* Cancel button (X) styling */
+.key.cancel {
+    background-color: #ff4f4f;
+    color: white;
+}
+
+.key.cancel:hover {
+    background-color: #ff2e2e;
+}
+
+.key.cancel:active {
+    background-color: #e12e2e;
+}
+
+/* Submit button styling */
+.key.submit {
+    background-color: #3b9ef3;
+    color: white;
+    grid-column: span 3; /* Make it span across 3 columns */
+}
+
+.key.submit:hover {
+    background-color: #358ac2;
+}
+
+.key.submit:active {
+    background-color: #2a6a92;
+}
+
+/* Icon button for '?' with yellow background */
+.key[data-key="question"] {
+    background-color: #f4d03f;
+    color: white;
+}
+
+.key[data-key="question"]:hover {
+    background-color: #f1c40f;
+}
+
+.key[data-key="question"]:active {
+    background-color: #e67e22;
+}

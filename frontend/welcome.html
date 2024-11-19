@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIN Entry</title>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome <strong id="username">Username</strong>! <br></span>Please enter your PIN</h1>
+
+        <!-- Pin Input Section -->
+        <div class="pin-input-container">
+            <input type="text" id="pin" class="pin-input" maxlength="4" readonly placeholder="----"/>
+        </div>
+
+        <!-- Onscreen Keyboard -->
+        <div class="keyboard">
+            <button class="key" data-key="1">1</button>
+            <button class="key" data-key="2">2</button>
+            <button class="key" data-key="3">3</button>
+            <button class="key" data-key="4">4</button>
+            <button class="key" data-key="5">5</button>
+            <button class="key" data-key="6">6</button>
+            <button class="key" data-key="7">7</button>
+            <button class="key" data-key="8">8</button>
+            <button class="key" data-key="9">9</button>
+            <button class="key cancel" data-key="clear">&#10005; Cancel</button> <!-- 'X' cancel icon -->
+            <button class="key" data-key="0">0</button>
+            <button class="key" data-key="question">?</button> <!-- ? icon placeholder -->
+            <button class="key submit" data-key="submit">Submit</button>
+        </div>
+    </div>
+
+    <script src="welcome.js"></script>
+</body>
+</html>

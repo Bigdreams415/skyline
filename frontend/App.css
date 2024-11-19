@@ -1,0 +1,1496 @@
+/* Reset and Basic Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #f0f2f5;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #1e1e2f;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%); /* Hidden by default */
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+.sidebar.active {
+    transform: translateX(0); /* Show sidebar when active */
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #ff8000;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar li {
+    width: 100%;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: #333354;
+    color: #ff8000;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* Close Button */
+.close-btn {
+    font-size: 24px;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+
+/* Hamburger Menu Styling (for mobile) */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block; /* Show hamburger menu on mobile */
+    }
+
+    /* Adjust sidebar behavior */
+    .sidebar {
+        width: 60%; /* Adjust the width of the sidebar on mobile */
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Show sidebar */
+    }
+}
+
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #1e1e2f;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(0); /* Default to visible */
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+/* Remove the transform property on larger screens to keep the sidebar visible */
+@media (min-width: 769px) {
+    .sidebar {
+        transform: translateX(0); /* Sidebar always visible */
+    }
+}
+
+/* Hamburger Menu Styling (for mobile) */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block; /* Show hamburger menu on mobile */
+    }
+
+    /* Adjust sidebar behavior */
+    .sidebar {
+        width: 60%; /* Adjust the width of the sidebar on mobile */
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Show sidebar */
+    }
+}
+
+
+/* Main Content and Top Navigation Styling */
+.main-content {
+    flex: 1;
+    display: flex;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+    flex-direction: column;
+    height: 100vh;
+    /* overflow: hidden; */
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.hamburger {
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: none; /* Only visible on mobile */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .notification, .user-info .profile {
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+/* User Information Box */
+.user-info-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 1100px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.user-info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.welcome-text strong {
+    color: #007bff;
+}
+
+.user-uid-container {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.uid-text {
+    font-weight: 600;
+    color: #333;
+}
+
+.uid-value {
+    font-weight: 700;
+    color: #28a745;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.uid-value:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px;
+        position: fixed;
+        z-index: 2;
+        transform: translateX(-100%); /* Hidden by default on mobile */
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Show sidebar in overlay */
+    }
+
+    .main-content {
+        margin-left: 0; /* Reset margin on mobile */
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger on mobile */
+    }
+}
+
+
+
+/* Dashboard card design */
+
+
+/* Dashboard Section */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+/* Card Base Styles */
+/* Updated Card Base Styles */
+.card {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), 
+                -6px -6px 12px rgba(255, 255, 255, 0.9);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+}
+
+/* Hover Effects for 3D Interaction */
+.card:hover {
+    transform: perspective(1000px) rotateX(-2deg) rotateY(2deg) scale(1.05);
+    box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.15),
+                -12px -12px 20px rgba(255, 255, 255, 0.9);
+}
+
+/* Pseudo-element for Layered Effect */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+    z-index: 0;
+    transform: rotate(25deg);
+    transition: all 0.5s ease;
+}
+
+.card:hover::before {
+    transform: rotate(45deg);
+    opacity: 0.6;
+}
+
+/* Card Heading Styling */
+.card h2 {
+    font-size: 1.5rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Icon Styling with Better Placement */
+.card h2 i {
+    margin-right: 0.75rem;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+}
+
+/* Text Styling */
+.card p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+    position: relative;
+    z-index: 1;
+}
+
+/* Highlight for Key Information */
+.balance-amount, .stat-number, .status {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+/* Progress Bar for Summary Card */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.progress {
+    width: 70%; /* Adjust dynamically */
+    height: 100%;
+    background: linear-gradient(to right, #4caf50, #81c784);
+    border-radius: 5px;
+    animation: loadProgress 2s ease;
+}
+
+
+/* Keyframes */
+@keyframes loadProgress {
+    from { width: 0%; }
+    to { width: 70%; }
+}
+
+/* Animation for Counter */
+.stat-number {
+    animation: counterAnimation 1s ease forwards;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Bar chat animation */
+
+/* Chart Bars Container */
+.chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Individual Bar */
+.chart-bar {
+    height: 8px; /* Thin bar */
+    background: #ddd; /* Default background for unset progress */
+    border-radius: 4px;
+    position: relative;
+    color: white;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 8px;
+    width: 0; /* Initial width for animation */
+    transition: width 2s ease-in-out;
+}
+
+
+
+/* Recent Transactions Section */
+.recent-transactions {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Highlight for Amount and Status */
+.credit {
+    color: #4caf50; /* Green for credits */
+    font-weight: bold;
+}
+
+.debit {
+    color: #f44336; /* Red for debits */
+    font-weight: bold;
+}
+
+.completed {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.pending {
+    color: #ffa000;
+    font-weight: bold;
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+        display: block;
+        overflow: hidden; /* Hide horizontal scroll */
+    }
+
+    /* Make the table headers and cells stack vertically */
+    th, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+    }
+
+    th {
+        display: none; /* Hide headers in mobile view */
+    }
+
+    /* Add labels before each data cell for clarity */
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Add labels (before) to each td based on data attributes */
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+        width: 50%;
+        display: inline-block;
+    }
+}
+
+/* Custom data-labels for mobile */
+td[data-label="Date"]:before { content: "Date: "; }
+td[data-label="Description"]:before { content: "Description: "; }
+td[data-label="Amount"]:before { content: "Amount: "; }
+td[data-label="Status"]:before { content: "Status: "; }
+
+
+/* Online Deposit section styling */
+
+
+/* Online Deposit Form */
+.online-deposit {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.online-deposit h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input[type="number"], input[type="text"], select, input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+input[type="file"] {
+    padding: 0.5rem;
+}
+
+.amount-field {
+    display: flex;
+    align-items: center;
+}
+
+.currency {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.wallet-address {
+    display: flex;
+    align-items: center;
+}
+
+.copy-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background-color: #45a049;
+}
+
+#receipt-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 1rem;
+    border-radius: 8px;
+    display: block;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* content-section styling */
+
+.content-section {
+    display: none; /* Hide all content sections by default */
+  }
+
+.content-section {
+    flex: 1;
+    overflow-y: auto; /* Vertical scrolling within this section */
+    padding: 20px;
+}
+
+/* Wire Transfer Form Styling */
+.wire-transfer {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.wire-transfer h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* General Form Group Styling */
+.wire-form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+/* Half Width Layout for Fields */
+.wire-form-group-half {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.wire-form-group-half .wire-form-group {
+    flex: 1 1 48%;  /* Ensure fields take up half width */
+}
+
+/* Labels and Inputs */
+.wire-form-group label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.wire-form-group input[type="number"],
+.wire-form-group input[type="text"],
+.wire-form-group select,
+.wire-form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* Amount Field with Dollar Sign */
+.amount-field {
+    display: flex;
+    align-items: center;
+}
+
+.currency {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    color: #333;
+}
+
+/* Full Width for Narration/Purpose */
+.full-width {
+    width: 100%;
+}
+
+/* Button Styling */
+.transfer-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.transfer-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .wire-form-group-half {
+        flex-direction: column;  /* Stack fields vertically on small screens */
+    }
+}
+
+
+
+ /* Css for loan and mortages */
+
+
+ /* Unique Styling for Loan/Mortgages Application Section */
+
+ .loan-submit-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.loan-application-section {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.loan-application-section h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.loan-application-section form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.loan-application-section .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.loan-amount-group,
+.loan-receiver-group {
+    flex: 1 1 48%;
+}
+
+.loan-narration-group {
+    flex: 1 1 100%;
+}
+
+.loan-application-section label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.loan-application-section input[type="number"],
+.loan-application-section input[type="text"],
+.loan-application-section textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.loan-application-section textarea {
+    resize: vertical;
+}
+
+.loan-application-section input[disabled] {
+    background-color: #e9ecef;
+    color: #6c757d;
+}
+
+.loan-amount-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.loan-currency {
+    font-size: 1.2rem;
+}
+
+.loan-submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: auto; /* Ensure the button only takes as much width as needed */
+}
+.loan-submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .loan-application-section {
+        padding: 1rem;
+        margin: 1rem;
+        max-width: 100%;
+    }
+
+    .loan-application-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .loan-application-section form {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .loan-amount-group,
+    .loan-receiver-group {
+        flex: 1 1 100%;
+    }
+
+    .loan-narration-group {
+        flex: 1 1 100%;
+    }
+
+    .loan-application-section label {
+        font-size: 1rem;
+    }
+
+    .loan-amount-field {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .loan-currency {
+        font-size: 1.1rem;
+    }
+
+    .loan-application-section input[type="number"],
+    .loan-application-section input[type="text"],
+    .loan-application-section textarea {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .loan-submit-btn {
+        font-size: 1.1rem;
+        padding: 0.8rem;
+    }
+}
+
+
+/* Domestic transfer styling */
+
+/* Unique Styling for Domestic Transfer Section */
+.unique-domestic-transfer {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.dt-title {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.unique-dt-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.unique-dt-field-group {
+    margin-bottom: 1.5rem;
+}
+
+.unique-dt-field-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.unique-dt-half-width {
+    flex: 1 1 48%;
+}
+
+.unique-dt-full-width {
+    flex: 1 1 100%;
+}
+
+.unique-dt-amount {
+    display: flex;
+    align-items: center;
+}
+
+.unique-dt-currency {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    color: #555;
+}
+
+input[type="number"], input[type="text"], select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Submit Button */
+.unique-dt-button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto;
+    width: 40%;
+    text-align: center;
+}
+
+.unique-dt-button:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+    .unique-dt-half-width {
+        flex: 1 1 100%;
+    }
+
+    .unique-dt-button {
+        width: 100%;
+    }
+}
+
+
+/* Withdrawal section styling */
+/* General Styling for Withdrawal Section */
+.withdrawal-section .withdrawal-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.withdrawal-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Tabs Styling */
+.withdrawal-section .withdrawal-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.withdrawal-section .withdrawal-tab {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+}
+
+.withdrawal-section .withdrawal-tab.active {
+    background: #007bff;
+    color: #fff;
+    border-bottom: 2px solid white;
+}
+
+/* Form Styling */
+.withdrawal-section .withdrawal-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.withdrawal-section .withdrawal-group {
+    margin-bottom: 1.5rem;
+}
+
+.withdrawal-section .half-width {
+    flex: 1 1 48%;
+}
+
+.withdrawal-section .full-width {
+    flex: 1 1 100%;
+}
+
+.withdrawal-section .amount-field {
+    display: flex;
+    align-items: center;
+}
+
+.withdrawal-section .currency {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.withdrawal-section input, 
+.withdrawal-section select, 
+.withdrawal-section button {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.withdrawal-section .withdrawal-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.withdrawal-section .withdrawal-submit:hover {
+    background-color: #218838;
+}
+
+/* Warning Box */
+.withdrawal-section .withdrawal-warning {
+    background: #ffefc1;
+    color: #856404;
+    padding: 1rem;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .withdrawal-section .half-width {
+        flex: 1 1 100%;
+    }
+}
+
+/* Mobile View Styling */
+@media (max-width: 768px) {
+     
+    .withdrawal-section .withdrawal-form {
+        flex-direction: column;
+    }
+
+     
+    .withdrawal-section .half-width, 
+    .withdrawal-section .full-width {
+        flex: 1 1 100%;
+    }
+
+     
+    .withdrawal-section .withdrawal-tabs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .withdrawal-section .withdrawal-tab {
+        border-radius: 5px;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+   
+    .withdrawal-section .withdrawal-group {
+        margin-bottom: 1rem;
+    }
+
+    .withdrawal-section input, 
+    .withdrawal-section select, 
+    .withdrawal-section button {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+   
+    .withdrawal-section .withdrawal-submit {
+        margin: 1rem auto 0 auto;
+        width: 100%;  
+        font-size: 1.1rem;
+    }
+
+     
+    .withdrawal-section .withdrawal-warning {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+}
+
+
+/* Base Styles */
+/* General Styling */
+.account-manager {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+    background-color: #f0f0f0;
+}
+
+.tab.active {
+    border-bottom: 3px solid #007bff;
+    background-color: #e0e0e0;
+}
+
+.tab-panel {
+    display: none;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.overview-card {
+    text-align: center;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.upload-area {
+    padding: 2rem;
+    border: 2px dashed #007bff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.upload-area input {
+    display: none;
+}
+
+.upload-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: #218838;
+}
+
+.approval-status p {
+    font-weight: bold;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        flex: 1 1 50%;
+        text-align: center;
+    }
+
+    .account-manager {
+        padding: 1rem;
+    }
+
+    .tab-panel {
+        padding: 1rem;
+    }
+
+    .overview-card {
+        text-align: left;
+    }
+
+    .profile-pic {
+        width: 80px;
+        height: 80px;
+    }
+
+    .upload-area {
+        padding: 1rem;
+    }
+
+    .upload-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+/* Transaction modal/summary styling */
+
+/* Modal container */
+#transaction-summary-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Sit on top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scrolling if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Header style */
+.modal-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Summary details */
+#summary-details p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Buttons */
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-actions .confirm-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.modal-actions .confirm-btn:hover {
+    background-color: #45a049;
+}
+
+.modal-actions .cancel-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.modal-actions .cancel-btn:hover {
+    background-color: #d32f2f;
+}
+
+#transaction-summary-modal {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#transaction-summary-modal.fade-in {
+    display: flex;
+    opacity: 1;
+}
+
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* PIN modal css */
+
+/* Close button styling */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #e74c3c; /* Change color when hovered */
+}
+
+/* Modal basic styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Title text styling */
+.modal-content h1 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Pin input container */
+.pin-input-container {
+    margin: 20px 0;
+}
+
+/* Pin input field */
+.pin-input {
+    font-size: 30px;
+    letter-spacing: 10px;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Keyboard layout */
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Styling for the individual keys */
+.key {
+    padding: 20px;
+    font-size: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: black; /* Make number keys black */
+}
+
+.key:hover {
+    background-color: #ddd;
+}
+
+.key.cancel {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.key.cancel:hover {
+    background-color: #c0392b;
+}
+
+.key.submit {
+    background-color: #2ecc71;
+    color: #fff;
+    grid-column: span 3;  
+    text-align: center;  
+    padding: 15px;
+}
+
+.key.submit:hover {
+    background-color: #27ae60;
+}
