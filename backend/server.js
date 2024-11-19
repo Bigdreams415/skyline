@@ -33,16 +33,14 @@ app.use(cors({
 // Request logging
 app.use(morgan('combined'));
 
-// Serve static files from 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+ 
 
-// Serve static files from the frontend folder
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Route to serve home.html for the homepage
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/signup.html'));
+    res.sendFile(path.join(__dirname, '../frontend/home.html'));
 });
+
 
 // MongoDB Config
 const db = process.env.MONGO_URI;
