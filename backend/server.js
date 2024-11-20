@@ -41,6 +41,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/home2.html'));
 });
 
+app.get('/admin/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/admin-login.html'));
+});
+
 
 // MongoDB Config
 const db = process.env.MONGO_URI;
@@ -577,6 +581,26 @@ app.get('/api/user-dashboard', authenticateJWT, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// Admin login route
+app.post('/admin/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Validate admin credentials
+    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+        // Admin credentials are valid, generate token
+        const token = generateAuthToken({ username }); // You can use any object to generate the token
+
+        // Send the token to the client
+        return res.status(200).json({ token });
+    } else {
+        // If credentials are incorrect
+        return res.status(401).json({ message: 'Invalid username or password' });
+    }
+});
+
+
+
 
 
 
