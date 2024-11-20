@@ -586,15 +586,15 @@ app.get('/api/user-dashboard', authenticateJWT, async (req, res) => {
 app.post('/admin/login', (req, res) => {
     const { username, password } = req.body;
 
-    // Validate admin credentials
+     
     if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
-        // Admin credentials are valid, generate token
-        const token = generateAuthToken({ username }); // You can use any object to generate the token
+         
+        const token = generateAuthToken({ username });  
 
-        // Send the token to the client
+         
         return res.status(200).json({ token });
     } else {
-        // If credentials are incorrect
+         
         return res.status(401).json({ message: 'Invalid username or password' });
     }
 });
