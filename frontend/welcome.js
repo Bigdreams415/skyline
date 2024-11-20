@@ -13,7 +13,7 @@ async function verifyPin(pin) {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/verify-pin', {
+        const response = await fetch('/verify-pin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

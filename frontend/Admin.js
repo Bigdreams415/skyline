@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Fetch all deposit methods when the page loads
     async function fetchDepositMethods() {
         try {
-            const response = await fetch('http://localhost:3000/admin/deposit', {
+            const response = await fetch('/admin/deposit', {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
             });
             const data = await response.json();
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const depositData = { method, details };
 
         try {
-            const response = await fetch('http://localhost:3000/admin/deposit', {
+            const response = await fetch('/admin/deposit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ document.getElementById('update-blc-btn').addEventListener('click', async () => 
     };
 
     try {
-        const response = await fetch(`http://localhost:3000/api/update-blc/${accountNumber}`, {
+        const response = await fetch(`/api/update-blc/${accountNumber}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
