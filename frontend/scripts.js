@@ -74,7 +74,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 
     // Send POST request to the backend (sign-up route)
     try {
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch('/signup', {
             method: 'POST',
             body: formData, // This will automatically handle file uploads
         });
