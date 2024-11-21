@@ -54,29 +54,29 @@ function populateReviewSummary() {
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Select the email and username fields
+
     const emailInput = document.getElementById('email');
     const usernameInput = document.getElementById('username');
 
-    // Trim and convert to lowercase
+    
     emailInput.value = emailInput.value.trim().toLowerCase();
     usernameInput.value = usernameInput.value.trim().toLowerCase();
 
-    // Gather all form data
+     
     const formData = new FormData(document.getElementById('signupForm'));
     const data = Object.fromEntries(formData.entries());
 
-    // Check if password and confirmPassword match
+     
     if (data.password !== data.confirmPassword) {
         alert("Passwords do not match!");
         return;
     }
 
-    // Send POST request to the backend (sign-up route)
+     
     try {
         const response = await fetch('/signup', {
             method: 'POST',
-            body: formData, // This will automatically handle file uploads
+            body: formData,  
         });
 
         if (!response.ok) {

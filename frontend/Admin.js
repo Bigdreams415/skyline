@@ -69,7 +69,7 @@ document.getElementById('search-button').addEventListener('click', async () => {
 
     try {
         // Fetch user details by account number
-        const response = await fetch(`http://localhost:3000/api/get-user/${accountNumber}`);
+        const response = await fetch(`/api/get-user/${accountNumber}`);
         const user = await response.json();
 
         if (response.ok) {

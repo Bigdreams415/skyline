@@ -41,9 +41,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/home2.html'));
 });
 
-app.get('/admin/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/admin-login.html'));
-});
+// app.get('/admin/login', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'frontend/admin-login.html'));
+// });
 
 
 // MongoDB Config
@@ -173,7 +173,7 @@ app.post('/signup', upload.single('photoID'), async (req, res) => {
         console.log("Form data:", req.body);
         console.log("Uploaded file:", req.file);
 
-        // Check for missing required fields (excluding photoID)
+         
         const requiredFields = [
             'fullName', 'dateOfBirth', 'gender', 'nationality',
             'residentialAddress', 'emailAddress', 'phoneNumber', 'employmentStatus',
@@ -189,13 +189,13 @@ app.post('/signup', upload.single('photoID'), async (req, res) => {
             });
         }
 
-        // Process photoID only if provided
+        
         const photoIDPath = req.file ? `uploads/${req.file.filename}` : null;
 
-        // Create and save the new user
+         
         const newUser = new User({
             ...req.body,
-            photoID: photoIDPath, // Set photoID to null if not provided
+            photoID: photoIDPath,  
             accountNumber: `ACC-${Math.floor(100000000 + Math.random() * 900000000)}`
         });
 
