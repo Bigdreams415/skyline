@@ -110,7 +110,7 @@
                     localStorage.setItem('authToken', token);
 
                     // Redirect to the admin dashboard
-                    window.location.href = '/admin.html';
+                    window.location.href = 'Admin.html';
                 } else {
                     const error = await response.json();
                     errorMessage.textContent = error.message || 'Invalid login credentials.';
