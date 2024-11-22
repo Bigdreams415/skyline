@@ -476,7 +476,7 @@ app.get('/api/get-deposit-method/:cryptoType', async (req, res) => {
 });
 
 
-//Getting users data through account balance
+
 
 // Route to get user details by account number
 app.get('/api/get-user/:accountNumber', async (req, res) => {
@@ -604,5 +604,5 @@ app.post('/admin/login', (req, res) => {
 
 
 
-// Start the server
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
