@@ -155,3 +155,76 @@ input[type="text"], input[type="number"], select {
         margin-left: 200px;
     }
 }
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+}
+
+.hamburger .line {
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        position: fixed;
+        height: 100%;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding-top: 70px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}

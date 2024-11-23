@@ -125,3 +125,23 @@ document.getElementById('update-blc-btn').addEventListener('click', async () => 
         alert('Failed to update BLC');
     }
 });
+
+const hamburger = document.getElementById("hamburger");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+// Toggle sidebar visibility
+function toggleSidebar() {
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+}
+
+// Close sidebar when clicking outside
+function closeSidebar() {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+// Event listeners
+hamburger.addEventListener("click", toggleSidebar);
+overlay.addEventListener("click", closeSidebar);

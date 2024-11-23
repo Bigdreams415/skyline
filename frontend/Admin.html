@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="logo">Admin Panel</div>
         <ul class="nav-links">
             <li><a href="#online-deposit">Online Deposit</a></li>
@@ -16,6 +16,16 @@
             <li><a href="#blc">BLC</a></li>
         </ul>
     </div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Main Content -->
     <div class="main-content">
@@ -41,27 +51,18 @@
                 <input type="text" id="wallet-address" placeholder="Enter wallet address">
                 <button type="submit">Update Address</button>
             </form>
-        
-            <!-- Container to display deposit methods -->
-            <ul id="deposit-methods-list">
-                <!-- Deposit methods will be listed here -->
-            </ul>
+            <ul id="deposit-methods-list"></ul>
         </section>
-        
 
-        <!-- Manage Balance Section -->
         <section id="manage-balance" class="section">
             <h2>Manage Balance</h2>
             <div class="search-bar">
                 <input type="text" id="search-account" placeholder="Search by Account Number">
                 <button>Search</button>
             </div>
-            <div id="user-details">
-                <!-- User balance info will be populated here after search -->
-            </div>
+            <div id="user-details"></div>
         </section>
 
-        <!-- BLC Section -->
         <section id="blc" class="section">
             <h2>BLC (Balance-Related Fields)</h2>
             <div class="search-bar">
@@ -71,26 +72,19 @@
             <div class="balance-fields">
                 <label for="totalBalance">Total Balance:</label>
                 <input type="number" id="totalBalance" placeholder="Update total balance">
-
                 <label for="loan-balance">Loan Balance:</label>
                 <input type="number" id="loan-balance" placeholder="Enter loan balance">
-
                 <label for="expenses">Expenses:</label>
                 <input type="number" id="expenses" placeholder="Enter expenses">
-
                 <label for="payments-today">Payments Today:</label>
                 <input type="number" id="payments-today" placeholder="Enter payments today">
-
                 <label for="new-loans">New Loans:</label>
                 <input type="number" id="new-loans" placeholder="Enter new loans">
-
                 <label for="transactions">Transactions:</label>
                 <input type="number" id="transactions" placeholder="Enter transactions">
-
                 <button id="update-blc-btn">Update BLC</button>
             </div>
         </section>
-
     </div>
 
     <script src="Admin.js"></script>
