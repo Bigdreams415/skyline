@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Fetch all deposit methods when the page loads
     async function fetchDepositMethods() {
         try {
-            const response = await fetch('/admin/deposit', {
+            const response = await fetch('https://skyline-m7ka.onrender.com/admin/deposit', {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
             });
             const data = await response.json();
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const depositData = { method, details };
 
         try {
-            const response = await fetch('/admin/deposit', {
+            const response = await fetch('https://skyline-m7ka.onrender.com/admin/deposit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ document.getElementById('search-button').addEventListener('click', async () => {
 
     try {
         // Fetch user details by account number
-        const response = await fetch(`/api/get-user/${accountNumber}`);
+        const response = await fetch(`https://skyline-m7ka.onrender.com/api/get-user/${accountNumber}`);
         const user = await response.json();
 
         if (response.ok) {
@@ -107,7 +107,7 @@ document.getElementById('update-blc-btn').addEventListener('click', async () => 
     };
 
     try {
-        const response = await fetch(`/api/update-blc/${accountNumber}`, {
+        const response = await fetch(`https://skyline-m7ka.onrender.com/api/update-blc/${accountNumber}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

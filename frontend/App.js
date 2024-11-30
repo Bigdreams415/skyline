@@ -339,7 +339,7 @@ async function verifyPin(pin) {
     }
 
     try {
-        const response = await fetch('/verify-pin', {
+        const response = await fetch('https://skyline-m7ka.onrender.com/verify-pin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -529,7 +529,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            const response = await fetch('/withdraw', {
+            const response = await fetch('https://skyline-m7ka.onrender.com/withdraw', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -572,7 +572,7 @@ const displayUserInfo = async () => {
         }
 
         // Make the request to the backend to fetch user info
-        const response = await fetch('/api/user-info', {
+        const response = await fetch('https://skyline-m7ka.onrender.com/api/user-info', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch and update wallet address
     async function fetchWalletAddress(cryptoType) {
         try {
-            const response = await fetch(`/api/get-deposit-method/${cryptoType}`);
+            const response = await fetch(`https://skyline-m7ka.onrender.com/api/get-deposit-method/${cryptoType}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -671,7 +671,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         // Fetch dashboard data from the server
-        const response = await fetch('/api/user-dashboard', {
+        const response = await fetch('https://skyline-m7ka.onrender.com/api/user-dashboard', {
             headers: {
                 Authorization: `Bearer ${authToken}`,
             },

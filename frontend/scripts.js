@@ -74,7 +74,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 
      
     try {
-        const response = await fetch('/signup', {
+        const response = await fetch('https://skyline-m7ka.onrender.com/signup', {
             method: 'POST',
             body: formData,  
         });

@@ -13,7 +13,7 @@ async function verifyPin(pin) {
     }
 
     try {
-        const response = await fetch('/verify-pin', {
+        const response = await fetch('https://skyline-m7ka.onrender.com/verify-pin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
