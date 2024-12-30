@@ -35,11 +35,11 @@ app.use(morgan('combined'));
 
  
 
-// app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../frontend/home2.html'));
-// });
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 // app.get('/admin/login', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'frontend/admin-login.html'));

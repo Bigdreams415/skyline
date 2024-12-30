@@ -1,65 +1,28 @@
-// Select elements
+// DOM Elements
 const sidebar = document.getElementById('sidebar');
-const closeBtn = document.getElementById('closeBtn');
-const hamburgerMenu = document.getElementById('hamburgerMenu');
+const hamburgerMenu = document.getElementById('hamburger-menu');
+const closeSidebar = document.getElementById('close-sidebar');
+const overlay = document.getElementById('overlay');
+const body = document.body;
 
-// Open the sidebar when hamburger menu is clicked
-hamburgerMenu.addEventListener('click', () => {
-    sidebar.classList.add('active'); // Show the sidebar
-});
-
-// Close the sidebar when close button is clicked
-closeBtn.addEventListener('click', () => {
-    sidebar.classList.remove('active'); // Hide the sidebar
-});
-
-
-// Js for dynamic counter animation
-
-document.querySelectorAll('.stat-number').forEach(stat => {
-    let target = +stat.getAttribute('data-target');
-    let count = 0;
-    let increment = Math.ceil(target / 100);
-
-    function updateCounter() {
-        if (count < target) {
-            count += increment;
-            stat.textContent = count;
-            setTimeout(updateCounter, 20);
-        } else {
-            stat.textContent = target;
-        }
+// Function to Toggle Sidebar and Overlay
+function toggleSidebar(open) {
+    if (open) {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        body.classList.add('no-scroll');
+    } else {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        body.classList.remove('no-scroll');
     }
-
-    updateCounter();
-});
-
-
-// Js for copy and image preview
-
-// Copy wallet address to clipboard
-function copyWalletAddress() {
-    const walletAddress = document.getElementById("wallet-address");
-    walletAddress.select();
-    walletAddress.setSelectionRange(0, 99999); // For mobile devices
-    document.execCommand("copy");
-    alert("Wallet Address copied!");
 }
 
-// Preview uploaded image
-function previewImage(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function() {
-        const imgPreview = document.getElementById("preview-img");
-        imgPreview.src = reader.result;
-        imgPreview.style.display = "block";
-    };
-    reader.readAsDataURL(file);
-}
+// Event Listeners
+hamburgerMenu.addEventListener('click', () => toggleSidebar(true));
+closeSidebar.addEventListener('click', () => toggleSidebar(false));
+overlay.addEventListener('click', () => toggleSidebar(false));
 
-
-//side bar navigation code
 
 // Sidebar Navigation Functions
 
@@ -173,13 +136,12 @@ document.querySelectorAll('.withdrawal-tab').forEach(tab => {
     });
 });
 
-
-//Account manager toggle functiuonality 
+// Account manager toggle functionality 
 
 document.addEventListener("DOMContentLoaded", () => {
     // Tab Switching Logic
-    const tabs = document.querySelectorAll(".tabs .tab");
-    const tabPanels = document.querySelectorAll(".tab-panel");
+    const tabs = document.querySelectorAll(".am-tabs .am-tab");
+    const tabPanels = document.querySelectorAll(".am-tab-panel");
 
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
@@ -194,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Drag and Drop for Document Upload
-    const uploadArea = document.querySelector(".upload-area");
+    const uploadArea = document.querySelector(".am-upload-area");
     uploadArea.addEventListener("dragover", (e) => {
         e.preventDefault();
         uploadArea.classList.add("dragging");
@@ -212,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Handle file processing here
     });
 });
+
 
 
 
@@ -665,7 +628,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const authToken = localStorage.getItem('authToken');
 
     if (!authToken) {
-        window.location.href = 'login.html'; // Redirect to login if token is missing
+        window.location.href = 'login.html';  
         return;
     }
 
