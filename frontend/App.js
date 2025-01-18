@@ -629,14 +629,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const convertedBalanceElement = document.getElementById('converted-balance');
     const currencySelector = document.getElementById('currency-selector');
 
-    const API_KEY = "your_api_key_here"; // Replace with your ExchangeRate API key
+    const API_KEY = "bc61aca92afb9d60c98ffc73"; // Replace with your ExchangeRate API key
     const apiUrl = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
 
     // Fetch balance from backend
     async function fetchBalance() {
         try {
             // Replace this with your actual backend endpoint
-            const response = await fetch('/api/get-balance'); 
+            const response = await fetch('https://skyline-m7ka.onrender.com/api/user-dashboard'); 
             const data = await response.json();
             return parseFloat(data.balance);
         } catch (error) {
