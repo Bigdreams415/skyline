@@ -406,6 +406,24 @@
     transition: width 2s ease-in-out;
 }
 
+.currency-dropdown {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    margin-left: 10px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.currency-dropdown:hover,
+.currency-dropdown:focus {
+    border-color: #4caf50;
+}
+
+
 
 
 /* Recent Transactions Section */

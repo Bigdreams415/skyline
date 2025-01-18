@@ -625,42 +625,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //displaying users data on dashboard
 document.addEventListener('DOMContentLoaded', async () => {
-    const authToken = localStorage.getItem('authToken');
+    const usdBalanceElement = document.getElementById('usd-balance');
+    const convertedBalanceElement = document.getElementById('converted-balance');
+    const currencySelector = document.getElementById('currency-selector');
 
-    if (!authToken) {
-        window.location.href = 'login.html';  
-        return;
-    }
+    const API_KEY = "your_api_key_here"; // Replace with your ExchangeRate API key
+    const apiUrl = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
 
-    try {
-        // Fetch dashboard data from the server
-        const response = await fetch('https://skyline-m7ka.onrender.com/api/user-dashboard', {
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch dashboard data');
+    // Fetch balance from backend
+    async function fetchBalance() {
+        try {
+            // Replace this with your actual backend endpoint
+            const response = await fetch('/api/get-balance'); 
+            const data = await response.json();
+            return parseFloat(data.balance);
+        } catch (error) {
+            console.error('Error fetching balance from backend:', error);
+            return 0.0; // Default to 0 if backend fails
         }
-
-        const data = await response.json();
-
-        // Populate dashboard with user data
-        document.getElementById('username').textContent = data.fullName || 'User';
-        document.getElementById('total-balance').textContent = `$${data.totalBalance || 0}`;
-        document.getElementById('total-transaction').textContent = `${data.Transactions || 0}`;
-        document.getElementById('total-loan').textContent = `${data.loan || 0}`;
-
-        document.getElementById('loan-balance').textContent = `${data.loan || 0}`;
-        document.getElementById('expenses').textContent = `${data.Expenses || 0}`;
-        document.getElementById('summary-status').textContent = 'On Track'; // Or dynamically determine status if available
-
-        document.getElementById('new-loans').textContent = `${data.newLoans || 0}`;
-        document.getElementById('payments-today').textContent = `${data.PaymentToday || 0}`;
-        document.getElementById('transactions').textContent = `${data.Transactions || 0}`;
-    } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-        alert('Failed to load dashboard. Please try again.');
     }
+
+    // Fetch exchange rates
+    async function fetchExchangeRates() {
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            return data.conversion_rates;
+        } catch (error) {
+            console.error('Error fetching exchange rates:', error);
+            return {};
+        }
+    }
+
+    // Update the converted balance dynamically
+    async function updateConvertedBalance(baseBalance, targetCurrency, rates) {
+        const conversionRate = rates[targetCurrency];
+        if (conversionRate) {
+            const convertedAmount = (baseBalance * conversionRate).toFixed(2);
+            convertedBalanceElement.textContent = `${targetCurrency} ${convertedAmount}`;
+        } else {
+            console.error('Conversion rate not found for', targetCurrency);
+            convertedBalanceElement.textContent = `$0.00`;
+        }
+    }
+
+    // Initialize the dashboard
+    async function initializeDashboard() {
+        const usdBalance = await fetchBalance();
+        const exchangeRates = await fetchExchangeRates();
+
+        // Set initial USD balance
+        usdBalanceElement.textContent = `$${usdBalance.toFixed(2)}`;
+
+        // Default conversion on page load (USD)
+        updateConvertedBalance(usdBalance, 'USD', exchangeRates);
+
+        // Listen for currency changes
+        currencySelector.addEventListener('change', () => {
+            const selectedCurrency = currencySelector.value;
+            updateConvertedBalance(usdBalance, selectedCurrency, exchangeRates);
+        });
+    }
+
+    initializeDashboard();
 });

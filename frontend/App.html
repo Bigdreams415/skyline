@@ -81,14 +81,24 @@
         <div class="content-section" id="dashboard-sec">
             <section class="dashboard">
 
-                <!-- Balance Card -->
                 <div class="card balance-card">
                     <h2><i class="icon-balance"></i> Balance</h2>
-                    <!-- <p>Welcome, <strong id="username">User Name</strong></p> -->
-                    <p>Total Balance: <span id="total-balance" class="balance-amount">$</span></p>
-                    <p>Total Transaction: <span id="total-transaction">0</span></p>
-                    <p>Total Loan: $<span id="total-loan">0</span></p>
+                    <p>
+                        Balance in USD: <span id="usd-balance" class="balance-amount">$0.00</span>
+                    </p>
+                    <p>
+                        Converted Balance: <span id="converted-balance" class="balance-amount">$0.00</span>
+                        <select id="currency-selector" class="currency-dropdown">
+                            <option value="USD" selected>USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="CAD">CAD</option>
+                            <option value="AUD">AUD</option>
+                            <option value="GYD">GYD</option>
+                        </select>
+                    </p>
                 </div>
+                
             
                 <!-- Monthly Transaction Chart Card -->
                 <div class="card transaction-chart-card">
@@ -121,7 +131,6 @@
             
             </section>
             
-
             <section class="recent-transactions">
                 <h2>Recent Transactions</h2>
                 <table>
@@ -133,26 +142,6 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <!-- <tbody>
-                        <tr>
-                            <td>2024-11-13</td>
-                            <td>Deposit</td>
-                            <td class="credit">$500.00</td>
-                            <td class="completed">Completed</td>
-                        </tr>
-                        <tr>
-                            <td>2024-11-12</td>
-                            <td>Withdrawal</td>
-                            <td class="debit">-$200.00</td>
-                            <td class="pending">Pending</td>
-                        </tr>
-                        <tr>
-                            <td>2024-11-11</td>
-                            <td>Transfer</td>
-                            <td class="debit">-$150.00</td>
-                            <td class="completed">Completed</td>
-                        </tr>
-                    </tbody> -->
                 </table>
             </section>
         </div>
