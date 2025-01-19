@@ -25,7 +25,7 @@ async function verifyPin(pin) {
         const result = await response.json();
 
         if (result.success) {
-            window.location.href = "app-maintainance.html"; // Redirect to the main app
+            window.location.href = "App.html";  
         } else {
             alert('Invalid PIN. Please try again.');
         }

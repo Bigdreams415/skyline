@@ -616,76 +616,80 @@ document.addEventListener('DOMContentLoaded', () => {
             await navigator.clipboard.writeText(walletAddressInput.value);
             alert('Wallet address copied to clipboard!');
         } catch (err) {
-            // console.error('Failed to copy wallet address:', err);
-            // alert('Failed to copy wallet address');
         }
     });
 });
 
 
-//displaying users data on dashboard
+// Displaying users' data on the dashboard with currency conversion
 document.addEventListener('DOMContentLoaded', async () => {
-    const usdBalanceElement = document.getElementById('usd-balance');
-    const convertedBalanceElement = document.getElementById('converted-balance');
-    const currencySelector = document.getElementById('currency-selector');
+    const authToken = localStorage.getItem('authToken');
 
-    const API_KEY = "bc61aca92afb9d60c98ffc73"; // Replace with your ExchangeRate API key
-    const apiUrl = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
-
-    // Fetch balance from backend
-    async function fetchBalance() {
-        try {
-            // Replace this with your actual backend endpoint
-            const response = await fetch('https://skyline-m7ka.onrender.com/api/user-dashboard'); 
-            const data = await response.json();
-            return parseFloat(data.balance);
-        } catch (error) {
-            console.error('Error fetching balance from backend:', error);
-            return 0.0; // Default to 0 if backend fails
-        }
+    if (!authToken) {
+        window.location.href = 'login.html';
+        return;
     }
 
-    // Fetch exchange rates
-    async function fetchExchangeRates() {
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            return data.conversion_rates;
-        } catch (error) {
-            console.error('Error fetching exchange rates:', error);
-            return {};
-        }
-    }
-
-    // Update the converted balance dynamically
-    async function updateConvertedBalance(baseBalance, targetCurrency, rates) {
-        const conversionRate = rates[targetCurrency];
-        if (conversionRate) {
-            const convertedAmount = (baseBalance * conversionRate).toFixed(2);
-            convertedBalanceElement.textContent = `${targetCurrency} ${convertedAmount}`;
-        } else {
-            console.error('Conversion rate not found for', targetCurrency);
-            convertedBalanceElement.textContent = `$0.00`;
-        }
-    }
-
-    // Initialize the dashboard
-    async function initializeDashboard() {
-        const usdBalance = await fetchBalance();
-        const exchangeRates = await fetchExchangeRates();
-
-        // Set initial USD balance
-        usdBalanceElement.textContent = `$${usdBalance.toFixed(2)}`;
-
-        // Default conversion on page load (USD)
-        updateConvertedBalance(usdBalance, 'USD', exchangeRates);
-
-        // Listen for currency changes
-        currencySelector.addEventListener('change', () => {
-            const selectedCurrency = currencySelector.value;
-            updateConvertedBalance(usdBalance, selectedCurrency, exchangeRates);
+    try {
+        // Fetch dashboard data from the server
+        const response = await fetch('https://skyline-m7ka.onrender.com/api/user-dashboard', {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
         });
-    }
 
-    initializeDashboard();
+        if (!response.ok) {
+            throw new Error('Failed to fetch dashboard data');
+        }
+
+        const data = await response.json();
+
+        // Update dashboard elements
+        document.getElementById('usd-balance').textContent = `$${data.totalBalance || 0}`;
+        document.getElementById('loan-balance').textContent = `${data.loan || 0}`;
+        document.getElementById('expenses').textContent = `${data.Expenses || 0}`;
+        document.getElementById('summary-status').textContent = 'On Track'; // Dynamically update if needed
+        document.getElementById('new-loans').textContent = `${data.newLoans || 0}`;
+        document.getElementById('payments-today').textContent = `${data.PaymentToday || 0}`;
+        document.getElementById('transactions').textContent = `${data.Transactions || 0}`;
+
+        // Handle currency conversion
+        const currencySelector = document.getElementById('currency-selector');
+        const convertedBalanceElement = document.getElementById('converted-balance');
+
+        // Function to convert balance
+        const convertBalance = async (currency) => {
+            try {
+                const conversionResponse = await fetch(
+                    `https://v6.exchangerate-api.com/v6/bc61aca92afb9d60c98ffc73/latest/USD`
+                );
+
+                if (!conversionResponse.ok) {
+                    throw new Error('Failed to fetch currency conversion data');
+                }
+
+                const conversionData = await conversionResponse.json();
+                const rate = conversionData.conversion_rates[currency];
+                const convertedBalance = (data.totalBalance || 0) * rate;
+
+                convertedBalanceElement.textContent = `${currency} ${convertedBalance.toFixed(2)}`;
+            } catch (error) {
+                console.error('Error converting currency:', error);
+                convertedBalanceElement.textContent = 'Conversion Failed';
+            }
+        };
+
+        // Default conversion to USD
+        convertBalance(currencySelector.value);
+
+        // Event listener for currency change
+        currencySelector.addEventListener('change', (event) => {
+            const selectedCurrency = event.target.value;
+            convertBalance(selectedCurrency);
+        });
+    } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        alert('Failed to load dashboard. Please try again.');
+    }
 });
+

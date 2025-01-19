@@ -21,10 +21,10 @@ if (loginForm) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(loginData),  // Pass the data to the backend
+                body: JSON.stringify(loginData),  
             });
 
-            const result = await response.json(); // Parse JSON response from server
+            const result = await response.json();  
 
             if (response.ok) {
                 // Successful login
