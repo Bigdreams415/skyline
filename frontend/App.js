@@ -364,7 +364,25 @@ window.addEventListener('click', function(event) {
 });
 
 
-// integrating withdrawal into frontend
+// JavaScript for Withdrawal Tab Switching and Modals
+document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".custom-withdrawal-tab");
+    const methods = document.querySelectorAll(".custom-withdrawal-method"); 
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function () {
+            tabs.forEach(tab => tab.classList.remove("active"));
+            methods.forEach(method => (method.style.display = "none"));
+            this.classList.add("active");
+            const methodId = this.dataset.method; 
+            const selectedMethod = document.getElementById(methodId);
+            if (selectedMethod) {
+                selectedMethod.style.display = "block";
+            }
+        });
+    });
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const cryptoForm = document.querySelector("#crypto-method form");
@@ -374,149 +392,77 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmTransactionBtn = document.querySelector("#confirm-transaction");
     const cancelTransactionBtn = document.querySelector("#cancel-transaction");
 
-    const pinModal = document.querySelector("#pin-modal");
-    const pinInput = document.querySelector("#pin");
-    const pinButtons = document.querySelectorAll(".keyboard .key");
+    let formData = {}; // To store form data
 
-    let formData = {};
+    // Function to show the modal
+    const showModal = () => {
+        transactionSummaryModal.classList.add("fade-in");
+    };
 
-    // Handle tab switching between Crypto and Bank
-    document.querySelectorAll(".withdrawal-tab").forEach(tab => {
-        tab.addEventListener("click", function () {
-            document.querySelectorAll(".withdrawal-tab").forEach(tab => tab.classList.remove("active"));
-            this.classList.add("active");
+    // Function to hide the modal
+    const hideModal = () => {
+        transactionSummaryModal.classList.remove("fade-in");
+        setTimeout(() => {
+            summaryDetails.innerHTML = ""; // Clear previous transaction details
+        }, 300); // Wait for transition to complete
+    };
 
-            const method = this.dataset.method;
-            if (method === "crypto") {
-                document.querySelector("#crypto-method").style.display = "block";
-                document.querySelector("#bank-method").style.display = "none";
-            } else {
-                document.querySelector("#crypto-method").style.display = "none";
-                document.querySelector("#bank-method").style.display = "block";
-            }
-        });
-    });
-
-    // Handle Crypto and Bank Form Submissions
-    [cryptoForm, bankForm].forEach(form => {
+    // Handle form submissions
+    [cryptoForm, bankForm].forEach((form) => {
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent default form submission
 
             const method = form === cryptoForm ? "crypto" : "bank";
-            const amount = parseFloat(document.querySelector(`#${method}-amount`).value);  // Amount validation here
+            const amount = parseFloat(document.querySelector(`#${method}-amount`).value);
 
             // Validate the amount
             if (isNaN(amount) || amount <= 0) {
-                alert("Invalid amount entered.");
+                alert("Please enter a valid amount.");
                 return;
             }
 
-            const withdrawalType = method === "crypto" ? document.querySelector("#crypto-type").value : "";
-            const walletAddress = method === "crypto" ? document.querySelector("#crypto-wallet").value : "";
-            const bankName = method === "bank" ? document.querySelector("#bank-name").value : "";
-            const accountNumber = method === "bank" ? document.querySelector("#account-number").value : "";
-            const routingNumber = method === "bank" ? document.querySelector("#routing-number").value : "";
-
-            // Prepare form data for backend
+            // Gather data
             formData = {
-                amount: amount,
-                withdrawalType: withdrawalType || null,
-                details: {
-                    walletAddress: walletAddress || null,
-                    bankName: bankName || null,
-                    accountNumber: accountNumber || null,
-                    routingNumber: routingNumber || null
-                }
+                method,
+                amount,
+                ...(method === "crypto"
+                    ? {
+                          withdrawalType: document.querySelector("#crypto-type").value,
+                          walletAddress: document.querySelector("#crypto-wallet").value,
+                      }
+                    : {
+                          bankName: document.querySelector("#bank-name").value,
+                          accountNumber: document.querySelector("#account-number").value,
+                          routingNumber: document.querySelector("#routing-number").value,
+                      }),
             };
 
-            // Show Transaction Summary Modal
+            // Populate the modal dynamically
             summaryDetails.innerHTML = `
                 <p><strong>Amount:</strong> $${formData.amount}</p>
-                ${formData.details.walletAddress ? `<p><strong>Wallet Address:</strong> ${formData.details.walletAddress}</p>` : ""}
-                ${formData.details.bankName ? `<p><strong>Bank Name:</strong> ${formData.details.bankName}</p>` : ""}
-                ${formData.details.accountNumber ? `<p><strong>Account Number:</strong> ${formData.details.accountNumber}</p>` : ""}
-                ${formData.details.routingNumber ? `<p><strong>Routing Number:</strong> ${formData.details.routingNumber}</p>` : ""}
-            `;
-            transactionSummaryModal.style.display = "block";
-        });
-    });
-
-    // Handle Cancel Button on Summary Modal
-    cancelTransactionBtn.addEventListener("click", function () {
-        transactionSummaryModal.style.display = "none";
-    });
-
-    // Handle Confirm Button on Summary Modal
-    confirmTransactionBtn.addEventListener("click", function () {
-        transactionSummaryModal.style.display = "none";
-        pinModal.style.display = "block"; // Show PIN modal
-    });
-
-    // Handle PIN Input (Onscreen Keyboard)
-    pinButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const key = this.dataset.key;
-            if (key === "clear") {
-                pinInput.value = ""; // Clear PIN input
-            } else if (key === "submit") {
-                if (pinInput.value) {
-                    submitWithdrawal(pinInput.value); // Submit withdrawal with entered PIN
-                } else {
-                    alert("Please enter your PIN before submitting.");
+                ${
+                    formData.method === "crypto"
+                        ? `<p><strong>Crypto Type:</strong> ${formData.withdrawalType}</p>
+                           <p><strong>Wallet Address:</strong> ${formData.walletAddress}</p>`
+                        : `<p><strong>Bank Name:</strong> ${formData.bankName}</p>
+                           <p><strong>Account Number:</strong> ${formData.accountNumber}</p>
+                           <p><strong>Routing Number:</strong> ${formData.routingNumber}</p>`
                 }
-            } else {
-                pinInput.value += key; // Append key to PIN input
-            }
+            `;
+
+            // Show the modal
+            showModal();
         });
     });
 
-    async function submitWithdrawal(pin) {
-        const activeTab = document.querySelector('.withdrawal-tab.active');
-        const withdrawalMethod = activeTab ? activeTab.dataset.method : null;
+    // Cancel Button: Close the modal
+    cancelTransactionBtn.addEventListener("click", hideModal);
 
-        if (!withdrawalMethod) {
-            alert('Withdrawal method not selected');
-            return;
-        }
-
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-            alert('Authorization token is missing. Please log in.');
-            return;
-        }
-
-        const requestData = {
-            ...formData,
-            withdrawalType: withdrawalMethod,
-            pin
-        };
-
-        try {
-            const response = await fetch('https://skyline-m7ka.onrender.com/withdraw', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(requestData),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                alert(`Error: ${errorData.message}`);
-                return;
-            }
-
-            const data = await response.json();
-            alert('Withdrawal successful!');
-            console.log('Withdrawal response:', data);
-        } catch (error) {
-            console.error('Error submitting withdrawal:', error);
-            alert('An error occurred while processing the withdrawal.');
-        } finally {
-            pinModal.style.display = "none"; // Hide PIN modal after processing
-        }
-    }
+    // Confirm Button: Close the modal and proceed
+    confirmTransactionBtn.addEventListener("click", function () {
+        alert("Transaction confirmed!"); // Simulate confirmation action
+        hideModal();
+    });
 });
 
 
@@ -526,19 +472,18 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to fetch and display user info
 const displayUserInfo = async () => {
     try {
-        // Get the JWT token from localStorage or wherever it is stored
-        const token = localStorage.getItem('authToken'); // Adjust based on where you store your token
+        const token = localStorage.getItem('authToken');
 
         if (!token) {
             console.log("Token missing");
             return;
         }
 
-        // Make the request to the backend to fetch user info
+         
         const response = await fetch('https://skyline-m7ka.onrender.com/api/user-info', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
+                'Authorization': `Bearer ${token}`, 
             },
         });
 
@@ -577,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
     const cryptoTypeSelect = document.getElementById('crypto-type');
     const walletAddressInput = document.getElementById('wallet-address');
-    const copyButton = document.querySelector('.copy-btn');  // Select the copy button
+    const copyButton = document.querySelector('.copy-btn');
 
     // Function to fetch and update wallet address
     async function fetchWalletAddress(cryptoType) {
