@@ -1263,3 +1263,76 @@ body {
         justify-content: center;
     }
 }
+
+ /* Style for the translate button */
+#translate-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Hover effect for better UX */
+#translate-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Positioning for the translator dropdown */
+.translate-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Hide Google default styling */
+.goog-te-gadget {
+  font-size: 0; /* Hides the default text */
+}
+
+/* Make dropdown visible when button is clicked */
+#google_translate_element {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensures it appears above other elements */
+}
+
+/* Style the dropdown select */
+.goog-te-combo {
+  width: 100%;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 600px) {
+  #translate-btn {
+      font-size: 14px;
+      padding: 8px 12px;
+  }
+
+  #google_translate_element {
+      top: 35px;
+      width: 120px;
+  }
+
+  .goog-te-combo {
+      font-size: 12px;
+      padding: 4px;
+  }
+}
+
+/* Hide the translator button after language selection */
+body.translated #translate-btn {
+  display: none;
+}

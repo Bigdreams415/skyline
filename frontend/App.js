@@ -578,14 +578,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Fetch dashboard data from the server
         const response = await fetch('https://skyline-m7ka.onrender.com/api/user-dashboard', {
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-            },
+            headers: { Authorization: `Bearer ${authToken}` },
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch dashboard data');
-        }
+        if (!response.ok) throw new Error('Failed to fetch dashboard data');
 
         const data = await response.json();
 
@@ -593,14 +589,41 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('usd-balance').textContent = `$${data.totalBalance || 0}`;
         document.getElementById('loan-balance').textContent = `${data.loan || 0}`;
         document.getElementById('expenses').textContent = `${data.Expenses || 0}`;
-        document.getElementById('summary-status').textContent = 'On Track'; // Dynamically update if needed
+        document.getElementById('summary-status').textContent = 'On Track';
         document.getElementById('new-loans').textContent = `${data.newLoans || 0}`;
         document.getElementById('payments-today').textContent = `${data.PaymentToday || 0}`;
         document.getElementById('transactions').textContent = `${data.Transactions || 0}`;
 
-        // Handle currency conversion
         const currencySelector = document.getElementById('currency-selector');
         const convertedBalanceElement = document.getElementById('converted-balance');
+
+        // Function to fetch available currencies and populate dropdown
+        const loadCurrencies = async () => {
+            try {
+                const currencyResponse = await fetch(
+                    `https://v6.exchangerate-api.com/v6/bc61aca92afb9d60c98ffc73/latest/USD`
+                );
+
+                if (!currencyResponse.ok) throw new Error('Failed to fetch currency data');
+
+                const currencyData = await currencyResponse.json();
+                const conversionRates = currencyData.conversion_rates;
+
+                // Populate currency dropdown dynamically
+                currencySelector.innerHTML = ""; // Clear existing options
+                Object.keys(conversionRates).forEach((currency) => {
+                    const option = document.createElement('option');
+                    option.value = currency;
+                    option.textContent = currency;
+                    currencySelector.appendChild(option);
+                });
+
+                // Default conversion to USD
+                convertBalance(currencySelector.value);
+            } catch (error) {
+                console.error('Error fetching currencies:', error);
+            }
+        };
 
         // Function to convert balance
         const convertBalance = async (currency) => {
@@ -609,9 +632,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     `https://v6.exchangerate-api.com/v6/bc61aca92afb9d60c98ffc73/latest/USD`
                 );
 
-                if (!conversionResponse.ok) {
-                    throw new Error('Failed to fetch currency conversion data');
-                }
+                if (!conversionResponse.ok) throw new Error('Failed to fetch conversion data');
 
                 const conversionData = await conversionResponse.json();
                 const rate = conversionData.conversion_rates[currency];
@@ -624,17 +645,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         };
 
-        // Default conversion to USD
-        convertBalance(currencySelector.value);
+        // Load all currencies
+        await loadCurrencies();
 
         // Event listener for currency change
         currencySelector.addEventListener('change', (event) => {
             const selectedCurrency = event.target.value;
             convertBalance(selectedCurrency);
         });
+
     } catch (error) {
         console.error('Error fetching dashboard data:', error);
         alert('Failed to load dashboard. Please try again.');
     }
 });
+
 
