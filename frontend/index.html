@@ -9,62 +9,13 @@
   <script src="https://www.google.com/recaptcha/enterprise.js?render=6LelZLIqAAAAAHu2RwA7HNw6NTzuumUs4g5K8uQ3"></script>
   <meta name="google-site-verification" content="Jja70kUuQzV6O_7SZVaRjEUvR4-MwTmQzI97k1Tmex0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-  <script>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-    
-        // Apply the stored language after Google Translate loads
-        setTimeout(() => {
-            let savedLang = localStorage.getItem("selectedLanguage");
-            if (savedLang) {
-                applyGoogleTranslate(savedLang);
-            }
-        }, 1000); // Ensure Google Translate is fully loaded before applying
-    }
-    
-    // Function to apply the saved language selection
-    function applyGoogleTranslate(lang) {
-        let select = document.querySelector(".goog-te-combo");
-        if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event("change"));
-        }
-    }
-    
-    // When the user selects a language, store it in localStorage
-    document.addEventListener("DOMContentLoaded", function () {
-        let translateBtn = document.getElementById("translate-btn");
-        let translateElement = document.getElementById("google_translate_element");
-    
-        if (translateBtn) {
-            translateBtn.addEventListener("click", function () {
-                translateElement.style.display = translateElement.style.display === "block" ? "none" : "block";
-            });
-        }
-    
-        // Listen for language selection
-        setTimeout(() => {
-            let select = document.querySelector(".goog-te-combo");
-            if (select) {
-                select.addEventListener("change", function () {
-                    let selectedLang = select.value;
-                    localStorage.setItem("selectedLanguage", selectedLang);
-                });
-            }
-        }, 2000);
-    });
-    </script>
-    
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
 </head>
 <body>
 
-    <div class="translate-container">
-      <button id="translate-btn">🌍 Translate</button>
-      <div id="google_translate_element"></div>
-    </div>
+  <div class="translate-container">
+    <button id="translate-btn">🌍 Translate</button>
+    <div id="google_translate_element"></div>
+  </div>
 
 
     <nav class="navbar">
@@ -424,7 +375,7 @@
     <script>
       function googleTranslateElementInit() {
           new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-      
+  
           // Ensure stored language is applied after Google Translate loads
           setTimeout(() => {
               let savedLang = localStorage.getItem("selectedLanguage");
@@ -433,8 +384,7 @@
               }
           }, 3000); // Adjust timeout if needed
       }
-      
-      // Function to apply stored language
+  
       function applyGoogleTranslate(lang) {
           let select = document.querySelector(".goog-te-combo");
           if (select) {
@@ -442,39 +392,30 @@
               select.dispatchEvent(new Event("change"));
           }
       }
-      
-      // Show/hide the translate dropdown when button is clicked
-      document.addEventListener("DOMContentLoaded", function() {
+  
+      document.addEventListener("DOMContentLoaded", function () {
           let translateBtn = document.getElementById("translate-btn");
           let translateElement = document.getElementById("google_translate_element");
-      
+  
           if (translateBtn) {
-              translateBtn.addEventListener("click", function() {
+              translateBtn.addEventListener("click", function () {
                   translateElement.style.display = translateElement.style.display === "block" ? "none" : "block";
               });
           }
-      
-          // Listen for language change and store it
+  
           setTimeout(() => {
               let select = document.querySelector(".goog-te-combo");
               if (select) {
-                  select.addEventListener("change", function() {
+                  select.addEventListener("change", function () {
                       let selectedLang = select.value;
                       localStorage.setItem("selectedLanguage", selectedLang);
                   });
               }
-          }, 2000); // Ensure Google Translate loads
-      
-          // Hide translate button if language is already selected
-          if (localStorage.getItem("selectedLanguage")) {
-              document.body.classList.add("translated");
-          }
+          }, 3000);
       });
-      </script>
-      
-      <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-      
-      
+  </script>
+  
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       
 </body>
 </html>

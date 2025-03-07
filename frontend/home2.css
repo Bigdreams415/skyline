@@ -1264,7 +1264,7 @@ body {
     }
 }
 
- /* Style for the translate button */
+/* Style for the translate button */
 #translate-btn {
   background-color: #007bff;
   color: white;
@@ -1305,13 +1305,14 @@ body {
   z-index: 1000; /* Ensures it appears above other elements */
 }
 
-/* Style the dropdown select */
+/* Ensure Google Translate dropdown is clickable */
 .goog-te-combo {
   width: 100%;
   font-size: 14px;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  cursor: pointer;
 }
 
 /* Mobile-friendly adjustments */
@@ -1330,9 +1331,4 @@ body {
       font-size: 12px;
       padding: 4px;
   }
-}
-
-/* Hide the translator button after language selection */
-body.translated #translate-btn {
-  display: none;
 }
