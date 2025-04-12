@@ -15,7 +15,6 @@ if (loginForm) {
         };
 
         try {
-            // Send login data to backend
             const response = await fetch("https://skyline-m7ka.onrender.com/login", {
                 method: "POST",
                 headers: {

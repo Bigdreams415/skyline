@@ -56,16 +56,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const keyValue = this.getAttribute('data-key');
 
             if (keyValue === 'clear') {
-                pinInput.value = '';  // Clearing PIN input
+                pinInput.value = '';   
             } else if (keyValue === 'submit') {
                 if (pinInput.value.length === 4) {
-                    verifyPin(pinInput.value);  // Verify PIN if it's 4 digits
+                    verifyPin(pinInput.value);   
                 } else {
                     alert('Please enter a 4-digit PIN.');
                 }
             } else {
                 if (pinInput.value.length < 4) {
-                    pinInput.value += keyValue;  // Add digit to PIN input
+                    pinInput.value += keyValue;   
                 }
             }
         });

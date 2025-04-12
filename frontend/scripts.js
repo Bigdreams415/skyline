@@ -33,20 +33,14 @@ function prevStep(step) {
 function populateReviewSummary() {
     const reviewSummary = document.getElementById('reviewSummary');
     
-    // Get all the form data
     const formData = new FormData(document.getElementById('signupForm'));
     const data = Object.fromEntries(formData.entries());
-
-    // Create a summary of the form inputs to display
     let summaryHTML = '<ul>';
     for (const [key, value] of Object.entries(data)) {
-        // Format the label text
         const label = document.querySelector(`label[for="${key}"]`);
         summaryHTML += `<li><strong>${label ? label.textContent : key}:</strong> ${value}</li>`;
     }
     summaryHTML += '</ul>';
-
-    // Insert the summary into the reviewSummary div
     reviewSummary.innerHTML = summaryHTML;
 }
 
@@ -101,5 +95,5 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 });
 
 
-// Initialize and show the first step
+ 
 showStep(currentStep);

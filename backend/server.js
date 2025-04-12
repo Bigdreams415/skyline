@@ -17,9 +17,8 @@ const fs = require('fs');
 const jwtSecret = process.env.JWT_SECRET;
 const app = express();
 const PORT = process.env.PORT || 3000;
-// Middlewares
 
-// Parse JSON and URL-encoded data
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -37,6 +36,8 @@ app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
@@ -44,6 +45,8 @@ app.get('/', (req, res) => {
 app.get('/admin/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend/admin-login.html'));
 });
+
+
 
 
 // MongoDB Config
@@ -145,35 +148,32 @@ const User = mongoose.model('User', userSchema);
 module.exports = User;
 
 
-
-// Create uploads folder if it doesn't exist
+// 1. Ensure uploads folder exists
 const uploadDirectory = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDirectory)) {
     fs.mkdirSync(uploadDirectory);
 }
 
-// Set storage engine for file uploads
+// 2. Multer Storage Config
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadDirectory); // Store files in the 'uploads' folder
+    destination: (req, file, cb) => {
+        cb(null, uploadDirectory);
     },
-    filename: function (req, file, cb) {
-        const fileExtension = path.extname(file.originalname);
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + fileExtension); // Unique filename
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+        cb(null, uniqueName);
     }
 });
 
-// Initialize multer
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-// POST /signup route with file upload
+// 3. Signup Route
 app.post('/signup', upload.single('photoID'), async (req, res) => {
     try {
-        console.log("Form data:", req.body);
-        console.log("Uploaded file:", req.file);
+        console.log('📦 Form Data:', req.body);
+        console.log('🖼️ Uploaded File:', req.file);
 
-         
         const requiredFields = [
             'fullName', 'dateOfBirth', 'gender', 'nationality',
             'residentialAddress', 'emailAddress', 'phoneNumber', 'employmentStatus',
@@ -185,32 +185,38 @@ app.post('/signup', upload.single('photoID'), async (req, res) => {
 
         if (missingFields.length > 0) {
             return res.status(400).json({
-                message: `The following fields are required: ${missingFields.join(', ')}`
+                message: `🚫 Missing fields: ${missingFields.join(', ')}`
             });
         }
 
-        
-        const photoIDPath = req.file ? `uploads/${req.file.filename}` : null;
+        // 4. If no file was uploaded, throw error
+        if (!req.file) {
+            return res.status(400).json({ message: 'Photo ID is required for verification.' });
+        }
 
-         
+        const photoIDPath = `uploads/${req.file.filename}`;
+
+        // 5. Create user
         const newUser = new User({
             ...req.body,
-            photoID: photoIDPath,  
+            photoID: photoIDPath,
             accountNumber: `ACC-${Math.floor(100000000 + Math.random() * 900000000)}`
         });
 
         await newUser.save();
 
         res.status(201).json({
-            message: "User account created successfully.",
-            accountNumber: newUser.accountNumber
+            message: '✅ User created successfully.',
+            accountNumber: newUser.accountNumber,
+            filePath: photoIDPath
         });
 
-    } catch (error) {
-        console.error("Signup error:", error);
-        res.status(500).json({ message: "An error occurred while creating the account." });
+    } catch (err) {
+        console.error('❌ Signup Error:', err);
+        res.status(500).json({ message: 'Server error during signup.' });
     }
 });
+
 
 // Login Route
 app.post('/login', async (req, res) => {
